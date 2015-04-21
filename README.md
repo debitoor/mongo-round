@@ -29,13 +29,13 @@ To cents and from cents - saves from rounding errors for armithmetic operations 
 ```javascript
 db.myCollection.aggregate([
 	{ $project: {
-		amountCents: round.toCents('$amount') // multiplies by 100 and rounds to zero decimals
+		amountCents: round.toCents('$amount') // toZeroDecimals(amount * 100)
 	} },
 	{ $group: {
 		_id: null, amountCents: {$sum: '$amountCents'}
 	} }
 	{ $project: {
-    	amount: round.fromCents('$amountCents') // divides by 100 and rounds to two decimals
+    	amount: round.fromCents('$amountCents') // toTwoDecimals(amount / 100)
     } }
 ]);
 ```
