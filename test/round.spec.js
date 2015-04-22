@@ -4,7 +4,7 @@ var jsRound = require('./jsRound');
 var mongojs = require('mongojs');
 var db = mongojs('testDB', ['testCollection']);
 
-describe('aggregationHelpers', function() {
+describe('round', function() {
 	var result, errors;
 
 	after(cleanDB);
