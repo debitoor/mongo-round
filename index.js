@@ -1,53 +1,42 @@
-function toZeroDecimals(valueExpression) {
+module.exports = round;
+
+function round(valueExpression, decimals) {
+	var multiplier = Math.pow(10, decimals || 0);
+
+	if (multiplier === 1) { // zero decimals
+		return {
+			$let: {
+				vars: {
+					valAdjusted: {
+						$add: [
+							valueExpression,
+							{$cond: [{$gte: [valueExpression, 0]}, 0.5, -0.5]}
+						]
+					}
+				},
+				in: {
+					$subtract: ['$$valAdjusted', {$mod: ['$$valAdjusted', 1]}]
+				}
+			}
+		};
+	}
+
 	return {
 		$let: {
 			vars: {
 				valAdjusted: {
 					$add: [
-						valueExpression,
-						{$cond: [{$gte: [valueExpression, 0]}, 0.5, -0.5]}
-					]
-				}
-			},
-			in: {
-				$subtract: ['$$valAdjusted', {$mod: ['$$valAdjusted', 1]}]
-			}
-		}
-	};
-}
-
-function toTwoDecimals(valueExpression) {
-	return {
-		$let: {
-			vars: {
-				val100adjusted: {
-					$add: [
-						{$multiply: [valueExpression, 100]},
+						{$multiply: [valueExpression, multiplier]},
 						{$cond: [{$gte: [valueExpression, 0]}, 0.5, -0.5]}
 					]
 				}
 			},
 			in: {
 				$divide: [
-					{$subtract: ['$$val100adjusted', {$mod: ['$$val100adjusted', 1]}]},
-					100
+					{$subtract: ['$$valAdjusted', {$mod: ['$$valAdjusted', 1]}]},
+					multiplier
 				]
 			}
 		}
 	};
 }
-
-function toCents(valueExpression) {
-	return toZeroDecimals({$multiply: [valueExpression, 100]});
-}
-
-function fromCents(valueExpression) {
-	return toTwoDecimals({$divide: [valueExpression, 100]});
-}
-
-module.exports = {
-	toCents: toCents,
-	fromCents: fromCents,
-	toTwoDecimals: toTwoDecimals,
-	toZeroDecimals: toZeroDecimals
-};

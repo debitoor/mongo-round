@@ -46,6 +46,11 @@ describe('aggregationHelpers', function() {
 		});
 
 		describe('toCents', function() {
+
+			function toCents(valueExpression) {
+				return round({$multiply: [valueExpression, 100]});
+			}
+
 			before(aggregateOperation(
 				{ $project: {
 					input: 1,
@@ -53,7 +58,7 @@ describe('aggregationHelpers', function() {
 						$map: {
 							input: '$input',
 							as: 'number',
-							in: round.toCents('$$number')
+							in: toCents('$$number')
 						}
 					}
 				} }
@@ -71,6 +76,11 @@ describe('aggregationHelpers', function() {
 		});
 
 		describe('fromCents', function() {
+
+			function fromCents(valueExpression) {
+				return round({$divide: [valueExpression, 100]}, 2);
+			}
+
 			before(aggregateOperation(
 				{ $project: {
 					input: 1,
@@ -78,7 +88,7 @@ describe('aggregationHelpers', function() {
 						$map: {
 							input: '$input',
 							as: 'number',
-							in: round.fromCents('$$number')
+							in: fromCents('$$number')
 						}
 					}
 				} }
@@ -95,7 +105,7 @@ describe('aggregationHelpers', function() {
 			});
 		});
 
-		describe('roundTwoDecimals', function() {
+		describe('to two decimals', function() {
 			before(aggregateOperation(
 				{ $project: {
 					input: 1,
@@ -103,7 +113,7 @@ describe('aggregationHelpers', function() {
 						$map: {
 							input: '$input',
 							as: 'number',
-							in: round.toTwoDecimals('$$number')
+							in: round('$$number', 2)
 						}
 					}
 				} }
@@ -120,7 +130,7 @@ describe('aggregationHelpers', function() {
 			});
 		});
 
-		describe('roundZeroDecimals', function() {
+		describe('to zero decimals', function() {
 			before(aggregateOperation(
 				{ $project: {
 					input: 1,
@@ -128,7 +138,7 @@ describe('aggregationHelpers', function() {
 						$map: {
 							input: '$input',
 							as: 'number',
-							in: round.toZeroDecimals('$$number')
+							in: round('$$number')
 						}
 					}
 				} }

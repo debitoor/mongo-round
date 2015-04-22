@@ -1,7 +1,12 @@
 {
   "name": "mongo-round",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mongo Aggregation Framework helper function to perform rounding of numbers",
+  "keywords": [
+    "mongo",
+    "aggregation",
+    "round"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "mocha"
