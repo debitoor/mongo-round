@@ -1,4 +1,4 @@
-# mongo-round [![Build Status](https://travis-ci.org/e-conomic/mongo-round.svg?branch=master)](https://travis-ci.org/e-conomic/mongo-round)
+# mongo-round [![npm version](https://badge.fury.io/js/mongo-round.svg)](http://badge.fury.io/js/mongo-round) [![Build Status](https://travis-ci.org/e-conomic/mongo-round.svg?branch=master)](https://travis-ci.org/e-conomic/mongo-round) [![devDependency Status](https://david-dm.org/e-conomic/mongo-round/dev-status.svg)](https://david-dm.org/e-conomic/mongo-round#info=devDependencies)
 
 Helper function to perform rounding of numbers when working with [mongoDB Aggregation Framework](http://docs.mongodb.org/manual/aggregation).
 
