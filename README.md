@@ -1,4 +1,4 @@
-# mongo-round
+# mongo-round [![Build Status](https://travis-ci.org/e-conomic/mongo-round.svg?branch=master)](https://travis-ci.org/e-conomic/mongo-round)
 
 Helper function to perform rounding of numbers when working with [mongoDB Aggregation Framework](http://docs.mongodb.org/manual/aggregation).
 
