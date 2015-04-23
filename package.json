@@ -21,9 +21,9 @@
   },
   "homepage": "https://github.com/e-conomic/mongo-round",
   "devDependencies": {
-    "chai": "^1.10.0",
+    "chai": "^2.2.0",
     "mocha": "^2.1.0",
-    "mocha-jshint": "^0.0.9",
+    "mocha-jshint": "^2.1.1",
     "mongojs": "^0.18.2"
   }
 }
